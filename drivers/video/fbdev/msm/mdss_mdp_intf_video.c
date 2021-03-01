@@ -1234,9 +1234,8 @@ static int mdss_mdp_video_wait4comp(struct mdss_mdp_ctl *ctl, void *arg)
 				usecs_to_jiffies(VSYNC_TIMEOUT_US));
 		mutex_lock(&ctl->lock);
 		if (rc == 0) {
-			pr_warn("vsync wait timeout %d, fallback to poll mode\n",
-					ctl->num);
-			ctx->polling_en++;
+			pr_warn("vsync wait timeout %d, fallback to poll mode\n", ctl->num);
+			ctx->polling_en = true;
 			rc = mdss_mdp_video_pollwait(ctl);
 		} else {
 			rc = 0;
